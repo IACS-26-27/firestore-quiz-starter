@@ -11,12 +11,16 @@ Google's servers check the rules first.
 
 | What | Read it? | Write it? |
 |---|---|---|
-| The quiz | Anyone | Nobody (from a web page) |
+| A quiz | Anyone | Only the person who made it |
+| A brand-new quiz | — | Anyone with a school account |
 | Your response | Anyone | **Only you**, with a school account |
 | Someone else's response | Anyone | Only them |
 | Delete any response | — | Nobody |
 
-Also, a response has to *look* like a response: `answers` must be a list,
+I made quiz-1 by hand, so it has no author, which means nobody can change
+it from a web page.
+
+Also, things have to *look* right: a response's `answers` must be a list,
 and if you include a `name`, it has to be your real one.
 
 The real rules are in [`firestore.rules`](../firestore.rules). See if you
@@ -75,4 +79,9 @@ Delete your hack code when you're done.
   resubmitting. (Hint: move your Step 4 code into its own `async`
   function, so both buttons can call it.)
 - Show which question each answer goes with, maybe as a `<table>`.
-- I can make a `quiz-2`. Change `quizId` and see what happens.
+- Make your own quiz. Write a document to `quizzes/<an ID you pick>` with a
+  `title`, a list of `questions` (each one `{ text: "..." }`), and
+  `author: user.uid`. Then change `quizId` to your ID. Can a friend take
+  your quiz? Can they change it?
+- Now go back and look at Step 2. You used `innerHTML` to show the
+  questions because I wrote them. Is that still safe?

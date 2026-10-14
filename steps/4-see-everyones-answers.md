@@ -84,7 +84,8 @@ and `appendChild` puts it on the page. Fix your loop, then have the
 prankster submit a normal answer.
 
 Rule of thumb: if a *person* typed it, show it with `textContent`. (Step 2
-used `innerHTML` safely because I wrote the questions.)
+used `innerHTML` because I wrote the questions. Hang on to that thought
+until Step 5.)
 
 ## Check yourself
 
