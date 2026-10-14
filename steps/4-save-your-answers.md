@@ -1,41 +1,21 @@
 # 4. Save your answers
 
-Your Step 2 code runs once, when the page loads. Saving is different: it
-has to wait until someone clicks "Submit". So we need code that runs
-*later*, which means another event listener, just like the sign-in button.
-
-Add this to the bottom of `app.js`:
+You already have a Submit button from Step 2 (`#quiz-submit`). Set up a listener to run when someone clicks it:
 
 ```js
-const submitButton = document.querySelector("#submit");
+const submitButton = document.querySelector("#quiz-submit");
 submitButton.addEventListener("click", async () => {
   const answers = [];
-  for (const input of quizDiv.querySelectorAll("input")) {
+  for (const input of document.querySelectorAll("#quiz-questions input")) {
     answers.push(input.value);
   }
   console.log(answers);
-
-  // Your Step 4 code goes here.
+  // More code coming soon...
 });
 ```
+Go ahead and run the code at this point to make sure you can successfully collect answers!
 
-Click Submit and check that your answers show up in the console as an
-array. Once that works, save them to the database.
-
-## Who are you?
-
-Inside your listener, find out who's signed in:
-
-```js
-const user = auth.currentUser;
-console.log(user.uid);
-```
-
-`user.uid` is your account's ID: a long random string that's the same every
-time you sign in. (If you get an error about reading `uid` of `null`,
-you're not signed in. Go back to Step 3.)
-
-## Write the address
+## Next Step: Send them to the Database!
 
 In Step 1 you made a reference to the quiz:
 
@@ -43,18 +23,40 @@ In Step 1 you made a reference to the quiz:
 doc(db, "quizzes/quiz-1")
 ```
 
-Your answers go one level deeper: in the quiz's `responses` collection, in
-a document whose ID is your `user.uid`. Make a reference called
-`myResponseRef` for that address. (Look back at the path in
-[Step 0](0-documents-and-collections.md) if you're not sure, and remember
-you can drop a variable into a string with `${}`.)
+We're going to save *answers* from each user in a `responses` collection inside the quiz, with one document per user, like this:
 
-## Save it
+`quizzes/quiz-1/responses/<user's ID>`
 
-Then write your answers there, along with your name:
+You can *build* the path from the `user` you saved in Step 3 like this:
 
 ```js
-await setDoc(myResponseRef, { answers: answers, name: user.displayName });
+const myResponseRef = doc(db, `quizzes/quiz-1/responses/${user.uid}`);
+```
+
+Your **answer** is going to be a *document* like everything in a **firestore** database. Our document will have this structure:
+
+```js
+{
+  name : "The Display Name for the User",
+  answers : [
+    ...a list of answers
+  ]
+}
+```
+
+So let's build the answer like this:
+
+```js
+let myResponse = {
+  name : user.displayName,
+  answers : answers
+};
+```
+
+Then, finally, we can *save* the answers using the function `setDoc` which we imported from firebase at the top:
+
+```js
+await setDoc(myResponseRef, myResponse);
 console.log("Saved!");
 ```
 
@@ -63,20 +65,11 @@ a new document. If something's already there, it replaces it.
 
 Fill in the boxes, click Submit, and look for `Saved!`.
 
-<details>
-<summary>Stuck on the reference?</summary>
-
-```js
-const myResponseRef = doc(db, `quizzes/quiz-1/responses/${user.uid}`);
-```
-
-</details>
-
 ## Seeing red?
 
 | Error says | Usually means |
 |---|---|
-| `Cannot read properties of null (reading 'uid')` | You're not signed in. |
+| `Cannot read properties of undefined (reading 'uid')` | You're not signed in, or the page reloaded since you did. Click Sign in. |
 | `Missing or insufficient permissions` | Your address is wrong. Did you use backticks (`` ` ``), not quotes, so `${user.uid}` actually becomes your uid? `console.log` the address and check. Or: you signed in with a personal account instead of your school one. |
 | `ReferenceError: ___ is not defined` | A typo, or a name that doesn't exist where you used it. |
 | `invalid-argument` | Your path has the wrong number of pieces. A document path always has an even number: collection, doc, collection, doc. |

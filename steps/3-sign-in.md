@@ -9,18 +9,21 @@ Add a "Sign in with Google" button to `index.html`, with the id `sign-in`.
 Then, in `app.js`:
 
 ```js
+let user; // A variable to store the user once they sign in!
 const signInButton = document.querySelector("#sign-in");
 signInButton.addEventListener("click", async () => {
   const result = await signInWithPopup(auth, new GoogleAuthProvider());
   console.log("Signed in as", result.user.email);
+  user = result.user; // Save the user!
 });
 ```
 
 Click it, and sign in with your *school* account. You should see
 `Signed in as ...` in the console.
 
-You only have to do this once. Firebase remembers you, even when the page
-reloads.
+Every time the page reloads, `user` starts out empty again, so you'll need
+to sign in again. (Firebase actually *does* remember you. Getting your page
+to notice is an extra challenge in Step 6.)
 
 ## Red stuff in the console
 
@@ -32,11 +35,14 @@ is.
 
 ## Try it
 
-Make the sign-in button disappear once you've signed in. (Hint: every
-element has a `hidden` property you can set to `true`.)
+You might want to think about the workflow for your user. We won't be able to save answers until the user is signed in, so what's the nicest way to make this work for your user? You could move the sign-in code to happen *when the user clicks Submit*, or you could wait to show the quiz *until the user has already signed in*. 
 
-You'll notice it comes back when the page reloads, even though you're
-still signed in. Your page loads faster than Firebase remembers you. Fixing
-that is an extra challenge in Step 6.
+If you want to hide and show buttons, the `hidden` attribute is the simplest way to handle it. You could start your whole quiz hidden (`<section id="quiz" hidden>`) and then only show it once the user is signed in; similarly, you could hide the sign in button once they're signed in.
+
+```js
+// When they sign in, show the quiz and hide the button!
+document.querySelector('#quiz').hidden = false;
+document.querySelector('#sign-in').hidden = true;
+```
 
 Next up: [Step 4: Save your answers](4-save-your-answers.md)

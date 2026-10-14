@@ -75,7 +75,8 @@ Delete your hack code when you're done.
 
 - Make the sign-in button stay hidden after a reload if you're already
   signed in. (Hint: `await auth.authStateReady()` waits until Firebase
-  remembers who you are. After that, check `auth.currentUser`.)
+  remembers who you are. After that, `auth.currentUser` is the signed-in
+  user, or `null` if nobody is. You could set `user` from it.)
 - Highlight your own row. (Hint: `responseDoc.id` is the document's ID.
   What should it match?)
 - Add a "Refresh" button that reloads everyone's answers without
@@ -84,7 +85,7 @@ Delete your hack code when you're done.
 - Show which question each answer goes with, maybe as a `<table>`.
 - Make your own quiz. Write a document to `quizzes/<an ID you pick>` with a
   `title`, a list of `questions` (each one `{ text: "..." }`), and
-  `author: auth.currentUser.uid`. Then point your page at it. How many
+  `author: user.uid`. Then point your page at it. How many
   places did you have to change `quiz-1`? Could a variable help?
 - Can a friend take your quiz? Can they change it?
 - Now go back and look at Step 2. You used `innerHTML` to show the

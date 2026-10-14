@@ -97,6 +97,22 @@ Rule of thumb: if a *person* typed it, show it with `textContent`. (Step 2
 used `innerHTML` because I wrote the questions. Hang on to that thought
 until Step 6.)
 
+## Extras: show them off
+
+A plain list works, but you can do a lot better. Some ideas:
+
+- One card per person, laid out in a grid (`display: grid` with
+  `grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr))`).
+- A circle with each person's initials as a little avatar.
+- Show favorite colors as actual colors: `row.style.backgroundColor =
+  response.answers[0]`. (If someone types something that isn't a color,
+  the browser just ignores it.)
+- Group answers by *question* instead of by person: everyone's favorite
+  number together, everyone's song together.
+- Make new results fade in with a CSS `animation`.
+
+Whatever you build, keep using `textContent` for anything a person typed.
+
 ## Check yourself
 
 - Change one answer and submit again. Did you add a second row, or replace
