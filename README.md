@@ -29,3 +29,12 @@ Do these in order. Each one adds a few lines to the same function in
   see `Signed in as ...` in the console.
 - Every time you save and the page reloads, you'll need to click Sign in
   again. Your code only runs after you sign in.
+
+## Publishing
+
+Turn on GitHub Pages: "Settings" → "Pages" → under "Source" pick "GitHub
+Actions". After that, every push publishes your site.
+
+Then tell me your site's address. Google sign-in only works on sites I've
+added to the database's list, so until I add yours, signing in on your
+published page will fail (on Live Server it works right away).
