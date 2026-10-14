@@ -1,0 +1,16 @@
+{
+  "name": "firestore-quiz-starter",
+  "version": "1.0.0",
+  "description": "Student starter: build a page that reads and writes a shared quiz",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

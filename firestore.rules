@@ -1,0 +1,34 @@
+rules_version = '2';
+
+// Reference copy only -- these are already deployed on the shared project
+// this starter points at. You're not administering a project of your own
+// here, so you won't paste this in anywhere. Read it anyway: it's the
+// actual security boundary for everything you're about to build.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /quizzes/{quizId} {
+      // Anyone can read the quiz (the questions themselves).
+      allow read: if true;
+
+      // Nobody writes a quiz through the app -- your teacher authored it
+      // by hand in the console.
+      allow write: if false;
+
+      match /responses/{uid} {
+        // Anyone can read responses -- that's what makes Step 4 possible.
+        allow read: if true;
+
+        // You may only ever create or overwrite the response document
+        // whose ID is YOUR OWN uid, signed in with a school account. There's no path that lets you write
+        // someone else's response, and no shared counter anywhere to
+        // race or spoof.
+        allow create, update: if request.auth != null
+          && request.auth.uid == uid
+          && request.auth.token.email.matches('.*@innovationcharter[.]org$');
+
+        // Nobody deletes a response once it exists.
+        allow delete: if false;
+      }
+    }
+  }
+}
