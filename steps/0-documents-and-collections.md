@@ -15,13 +15,14 @@ quizzes/quiz-1
 
 That means: the document with ID `quiz-1`, in the `quizzes` collection.
 
-A document can have collections inside it, too. Each person's answers to
-the quiz will live here:
+A document can have its own collections inside it, too. The quiz has a
+`responses` collection, with one document per person who answers:
 
 ```
-quizzes/quiz-1/responses/<your ID>
+quizzes/quiz-1/responses/<your account's ID>
 ```
 
-That's all you need for now.
+Your account's ID is a long random string Google gives your account. You'll
+see it in Step 3.
 
 **Next:** [Step 1: Get the quiz](1-get-the-quiz.md)

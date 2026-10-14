@@ -1,8 +1,13 @@
 # 1. Get the quiz from the database
 
-Open [`app.js`](../app.js). Find the line that says
-`Your code goes below this line`. That's inside a function that runs right
-after you sign in. All your code for every step goes there.
+Open [`app.js`](../app.js) and read it top to bottom first. The top part
+loads Firebase and sets up the names you'll use: `db` is the database,
+`quizId` is which quiz to load, and `quizSection` / `resultsSection` are
+spots on the page. Don't change any of that.
+
+Find the line that says `Your code goes below this line`. That's inside a
+function that runs right after you sign in. All your code for every step
+goes there.
 
 Add this:
 
@@ -36,7 +41,8 @@ response and you had to call `.json()` to get the data out.
 Look at the object in your console and answer:
 
 - What's in `quiz.questions`?
-- What is the text of the first question? How would you write that in code?
+- How would you write the text of the *first* question in code? Try
+  `console.log`-ing it to check.
 - How many questions are there?
 
 **Next:** [Step 2: Show the questions](2-show-the-questions.md)
