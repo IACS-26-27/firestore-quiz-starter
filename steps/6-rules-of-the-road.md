@@ -1,4 +1,4 @@
-# 5. The rules of the road
+# 6. The rules of the road
 
 Everyone in the class can write to this database. So what stops you from
 changing someone else's answers? Or the quiz itself?
@@ -31,8 +31,8 @@ can match each line to a row in the table.
 The rules run on Google's servers, not in your page, so nothing you change
 in `app.js` gets around them. Don't take my word for it -- prove it.
 
-Add this at the *very end* of your sign-in function, after your Submit
-listener:
+Add this inside your sign-in listener, right after the
+`console.log("Signed in as"...)` line, so it runs once you're signed in:
 
 ```js
 try {
@@ -49,18 +49,15 @@ try {
 Try these hacks *one at a time*. Each one needs an `await setDoc(...)`
 line, and you write the reference:
 
-1. Write `{ answers: ["hacked"] }` to a response whose ID is
-   `"someone-else"`.
+1. Write `{ answers: ["hacked"] }` to `quizzes/quiz-1/responses/someone-else`.
 2. Write `{ title: "hacked" }` to the quiz itself.
 3. Write `{ answers: "hacked" }` (a string, not a list) to *your own*
-   response.
+   response. (In here, your uid is `result.user.uid`.)
 4. Write `{ answers: ["hi"], name: "Your Teacher" }` to your own response.
 
 Each one should print `Blocked: permission-denied`. If you get anything
 else, that means your code has a mistake, not that the rules stopped you
-(see the [error table in Step 3](3-save-your-answers.md#seeing-red)).
-Watch out: `myResponseRef` only exists inside your Submit listener, so out
-here you'll need to make a new reference.
+(see the [error table in Step 4](4-save-your-answers.md#seeing-red)).
 
 Delete your hack code when you're done.
 
@@ -76,12 +73,13 @@ Delete your hack code when you're done.
 - Highlight your own row. (Hint: `responseDoc.id` is the document's ID.
   What should it match?)
 - Add a "Refresh" button that reloads everyone's answers without
-  resubmitting. (Hint: move your Step 4 code into its own `async`
+  resubmitting. (Hint: move your Step 5 code into its own `async`
   function, so both buttons can call it.)
 - Show which question each answer goes with, maybe as a `<table>`.
 - Make your own quiz. Write a document to `quizzes/<an ID you pick>` with a
   `title`, a list of `questions` (each one `{ text: "..." }`), and
-  `author: user.uid`. Then change `quizId` to your ID. Can a friend take
-  your quiz? Can they change it?
+  `author: auth.currentUser.uid`. Then point your page at it. How many
+  places did you have to change `quiz-1`? Could a variable help?
+- Can a friend take your quiz? Can they change it?
 - Now go back and look at Step 2. You used `innerHTML` to show the
   questions because I wrote them. Is that still safe?

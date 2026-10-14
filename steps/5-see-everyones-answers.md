@@ -1,4 +1,4 @@
-# 4. See everyone's answers
+# 5. See everyone's answers
 
 Your answers are in the database now, along with everyone else's who has
 submitted. Let's get them all back.
@@ -6,10 +6,9 @@ submitted. Let's get them all back.
 Put this *inside* your Submit listener, after `console.log("Saved!")`:
 
 ```js
-const responsesRef = collection(db, "quizzes", quizId, "responses");
+const responsesRef = collection(db, "quizzes/quiz-1/responses");
 const responsesSnapshot = await getDocs(responsesRef);
 
-resultsSection.innerHTML = "";
 for (const responseDoc of responsesSnapshot.docs) {
   const response = responseDoc.data();
   console.log(response);
@@ -26,18 +25,29 @@ Submit, and look in the console. You should see one object per person.
 
 ## Put them on the page
 
-Now show each response in `resultsSection` instead of the console: the
+Add another element to `index.html` for the results, with the id
+`results`, and grab it in `app.js` as `resultsDiv`.
+
+Now show each response in `resultsDiv` instead of the console: the
 person's name and their answers. (Hint: `response.answers.join(", ")`
 turns the array into one string.) Write it the same way you did in Step 2.
+And clear out `resultsDiv` before the loop, or every Submit will add
+another copy of everything.
 
 <details>
 <summary>Stuck? Peek at one way to write it</summary>
 
+Before the loop:
+
 ```js
-resultsSection.innerHTML += `<p>${response.name}: ${response.answers.join(", ")}</p>`;
+resultsDiv.innerHTML = "";
 ```
 
-That goes inside the loop, in place of `console.log(response)`.
+Inside the loop, in place of `console.log(response)`:
+
+```js
+resultsDiv.innerHTML += `<p>${response.name}: ${response.answers.join(", ")}</p>`;
+```
 
 </details>
 
@@ -76,7 +86,7 @@ as typed and never runs it:
 ```js
 const row = document.createElement("p");
 row.textContent = `${response.name}: ${response.answers.join(", ")}`;
-resultsSection.appendChild(row);
+resultsDiv.appendChild(row);
 ```
 
 `createElement` makes a new element without putting it on the page yet,
@@ -85,7 +95,7 @@ prankster submit a normal answer.
 
 Rule of thumb: if a *person* typed it, show it with `textContent`. (Step 2
 used `innerHTML` because I wrote the questions. Hang on to that thought
-until Step 5.)
+until Step 6.)
 
 ## Check yourself
 
@@ -93,6 +103,6 @@ until Step 5.)
   your first one? Why?
 - Your page only shows results *after* you submit. Does that stop someone
   from seeing everyone's answers without submitting? (Hint: no. That's your
-  page's choice, not a rule. Step 5 is about the actual rules.)
+  page's choice, not a rule. Step 6 is about the actual rules.)
 
-Next up: [Step 5: The rules of the road](5-rules-of-the-road.md)
+Next up: [Step 6: The rules of the road](6-rules-of-the-road.md)

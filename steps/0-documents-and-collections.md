@@ -25,6 +25,6 @@ quizzes/quiz-1/responses/<your account's ID>
 ```
 
 Your account's ID is a long random string Google gives your account. You'll
-see it in Step 3.
+see it in Step 4.
 
 Next up: [Step 1: Get the quiz](1-get-the-quiz.md)
