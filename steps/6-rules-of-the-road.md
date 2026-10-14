@@ -15,13 +15,12 @@ Google's servers check the rules first.
 | A brand-new quiz | — | Anyone with a school account |
 | Your response | Anyone | **Only you**, with a school account |
 | Someone else's response | Anyone | Only them |
-| Delete any response | — | Nobody |
 
 I made quiz-1 by hand, so it has no author, which means nobody can change
 it from a web page.
 
-Also, things have to *look* right: a response's `answers` must be a list,
-and if you include a `name`, it has to be your real one.
+Also, a response has to *look* like a response: a `name` (text) and
+`answers` (a list).
 
 The real rules are in [`firestore.rules`](../firestore.rules). See if you
 can match each line to a row in the table.
@@ -35,7 +34,7 @@ Add this inside your Submit listener, right after `console.log("Saved!")`:
 
 ```js
 try {
-  await setDoc(doc(db, "quizzes/quiz-1/responses/someone-else"), { answers: ["hacked"] });
+  await setDoc(doc(db, "quizzes/quiz-1/responses/someone-else"), { name: "hacker", answers: ["hacked"] });
   console.log("It worked?!");
 } catch (error) {
   console.log("Blocked:", error.code, error.message);
@@ -50,15 +49,14 @@ response.
 Now swap in these hacks, *one at a time*. You write the `setDoc` line:
 
 2. Write `{ title: "hacked" }` to the quiz itself.
-3. Write `{ answers: "hacked" }` (a string, not a list) to *your own*
-   response.
-4. Write `{ answers: ["hi"], name: "Your Teacher" }` to your own response.
+3. Write `{ name: "me", answers: "hacked" }` (a string, not a list) to
+   *your own* response.
 
 Each one should say `permission-denied`. If it says anything else, read the
 message: that's a mistake in your code, not the rules (see the
 [error table in Step 4](4-save-your-answers.md#seeing-red)).
 
-One sneaky thing: if your address for #3 or #4 is wrong, you'll *also* get
+One sneaky thing: if your address for #3 is wrong, you'll *also* get
 `permission-denied`, because you're writing to a document that isn't yours.
 `console.log` the address to make sure it really ends in your uid.
 

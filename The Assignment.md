@@ -28,5 +28,4 @@ way to requirements 1, 2, and 4. The rest is up to you.
 2. **Extend the data model.** Add something new to your own quiz. For
    example, questions could have different types (number vs. text), or each
    question could have a `color` that changes how it's displayed. The rules
-   let you add your own fields to a quiz you made, as long as it still has a
-   `title`, a list of `questions`, and you as the `author`.
+   let you put any fields you like in a quiz you made.
