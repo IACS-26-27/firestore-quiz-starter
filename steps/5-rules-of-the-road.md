@@ -3,9 +3,9 @@
 Everyone in the class can write to this database. So what stops you from
 changing someone else's answers? Or the quiz itself?
 
-**Security rules.** The database has a short list of rules saying who can
-do what. Every time anyone reads or writes anything, Google's servers check
-the rules first.
+The answer is *security rules*. The database has a short list of rules
+saying who can do what, and every time anyone reads or writes anything,
+Google's servers check the rules first.
 
 ## Our rules, in plain English
 
@@ -19,15 +19,15 @@ the rules first.
 Also, a response has to *look* like a response: `answers` must be a list,
 and if you include a `name`, it has to be your real one.
 
-The real rules are in [`firestore.rules`](../firestore.rules). Try matching
-each line to a row in the table.
+The real rules are in [`firestore.rules`](../firestore.rules). See if you
+can match each line to a row in the table.
 
 ## Try to break them
 
-The rules run on Google's servers, not in your page. Nothing you change in
-`app.js` gets around them. Prove it.
+The rules run on Google's servers, not in your page, so nothing you change
+in `app.js` gets around them. Don't take my word for it -- prove it.
 
-Add this at the **very end** of your sign-in function, after your Submit
+Add this at the *very end* of your sign-in function, after your Submit
 listener:
 
 ```js
@@ -42,21 +42,21 @@ try {
 `try`/`catch` lets your code keep running when something fails, and
 `error.code` tells you *why* it failed.
 
-Try these hacks, **one at a time**. Each one needs an `await setDoc(...)`
-line. You write the reference:
+Try these hacks *one at a time*. Each one needs an `await setDoc(...)`
+line, and you write the reference:
 
 1. Write `{ answers: ["hacked"] }` to a response whose ID is
    `"someone-else"`.
 2. Write `{ title: "hacked" }` to the quiz itself.
-3. Write `{ answers: "hacked" }` (a string, not a list) to **your own**
+3. Write `{ answers: "hacked" }` (a string, not a list) to *your own*
    response.
 4. Write `{ answers: ["hi"], name: "Your Teacher" }` to your own response.
 
-Each one should print `Blocked: permission-denied`. Anything else means
-your code has a mistake, not that the rules stopped you (see the
-[error table in Step 3](3-save-your-answers.md#seeing-red)). Watch out:
-`myResponseRef` only exists inside your Submit listener, so out here you
-need to make a new reference.
+Each one should print `Blocked: permission-denied`. If you get anything
+else, that means your code has a mistake, not that the rules stopped you
+(see the [error table in Step 3](3-save-your-answers.md#seeing-red)).
+Watch out: `myResponseRef` only exists inside your Submit listener, so out
+here you'll need to make a new reference.
 
 Delete your hack code when you're done.
 
@@ -71,8 +71,8 @@ Delete your hack code when you're done.
 
 - Highlight your own row. (Hint: `responseDoc.id` is the document's ID.
   What should it match?)
-- Add a **Refresh** button that reloads everyone's answers without
+- Add a "Refresh" button that reloads everyone's answers without
   resubmitting. (Hint: move your Step 4 code into its own `async`
   function, so both buttons can call it.)
 - Show which question each answer goes with, maybe as a `<table>`.
-- Your teacher can make a `quiz-2`. Change `quizId` and see what happens.
+- I can make a `quiz-2`. Change `quizId` and see what happens.

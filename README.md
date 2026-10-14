@@ -1,12 +1,12 @@
 # Get to Know the Class
 
-In the weather project, you used `fetch` to **read** data from someone else's
-server. This time you'll read **and write** data, in a database your whole
-group shares. You'll answer a quiz, save your answers, and then see everyone
-else's answers come back to your page.
+Hello friends. In the weather project, you used `fetch` to *read* data from
+someone else's server. This time you'll read *and* write data, in a database
+your whole group shares. You'll answer a quiz, save your answers, and then
+see everyone else's answers show up on your page.
 
-Your teacher has already set up the database. It's called **Firestore**, and
-it's made by Google. You don't need to set anything up.
+I've already set up the database (it's called Firestore, and it's made by
+Google), so you don't need to set anything up.
 
 ## Steps
 
@@ -23,9 +23,9 @@ Do these in order. Each one adds a few lines to the same function in
 ## Before you start
 
 - Start Live Server, same as always, and open the page.
-- Open dev tools (right-click → **Inspect**) and click the **Console** tab.
+- Open dev tools (right-click → "Inspect") and click the "Console" tab.
   Keep it open the whole time.
-- Click **Sign in with Google** and use your **school** account. You should
+- Click "Sign in with Google" and use your *school* account. You should
   see `Signed in as ...` in the console.
-- Every time you save and the page reloads, **click Sign in again**. Your
-  code only runs after you sign in.
+- Every time you save and the page reloads, you'll need to click Sign in
+  again. Your code only runs after you sign in.

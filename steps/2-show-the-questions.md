@@ -1,8 +1,8 @@
 # 2. Show the questions on the page
 
-Right now the quiz only shows up in the console. Put it on the page.
+Right now the quiz only shows up in the console. Let's put it on the page.
 
-For **each** question in `quiz.questions`, add this HTML to `quizSection`:
+For *each* question in `quiz.questions`, add this HTML to `quizSection`:
 
 ```js
 `<p>
@@ -41,10 +41,10 @@ for (const question of quiz.questions) {
 
 </details>
 
-## Notice
+## Notice anything?
 
-**None of the questions are written in your code.** They come from the
-database. If your teacher changes a question or adds a fifth one, your page
-shows it — and you don't change a thing.
+None of the questions are written in your code. They come from the
+database. If I change a question or add a fifth one, your page will show
+it without you changing a thing.
 
-**Next:** [Step 3: Save your answers](3-save-your-answers.md)
+Next up: [Step 3: Save your answers](3-save-your-answers.md)
