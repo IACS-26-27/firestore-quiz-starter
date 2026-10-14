@@ -19,6 +19,9 @@ way to requirements 1, 2, and 4. The rest is up to you.
    people can answer *different* questions. Then give users a way to switch
    between your quiz and the default one. (Start with the last few ideas in
    [Step 6](steps/6-rules-of-the-road.md#if-you-finish).)
+7. **Credit your sources.** Keep [`citations.html`](citations.html) up to
+   date, and keep the link to it in your footer. List any fonts, images, or
+   code you borrowed, and *all* AI use (what you asked, and what you changed).
 
 ## Honors
 
