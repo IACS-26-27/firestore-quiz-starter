@@ -35,4 +35,8 @@ is.
 Make the sign-in button disappear once you've signed in. (Hint: every
 element has a `hidden` property you can set to `true`.)
 
+You'll notice it comes back when the page reloads, even though you're
+still signed in. Your page loads faster than Firebase remembers you. Fixing
+that is an extra challenge in Step 6.
+
 Next up: [Step 4: Save your answers](4-save-your-answers.md)

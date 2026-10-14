@@ -54,6 +54,7 @@ for (const question of quiz.questions) {
     </p>
   `;
 }
+quizDiv.innerHTML += `<button id="submit">Submit</button>`;
 ```
 
 </details>

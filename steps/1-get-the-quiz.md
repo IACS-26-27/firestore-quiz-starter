@@ -39,7 +39,7 @@ and you had to call `.json()` to get the data out.
 (Why bother with a snapshot? It also knows things that aren't *in* the
 data. For example, if nothing's at that address, `quizSnapshot.exists()` is
 `false` and `.data()` is `undefined`. Try it: change `quiz-1` to
-`quiz-nope`.)
+`quiz-nope`. Then change it back!)
 
 ## Check yourself
 

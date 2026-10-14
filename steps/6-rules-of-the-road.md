@@ -31,33 +31,36 @@ can match each line to a row in the table.
 The rules run on Google's servers, not in your page, so nothing you change
 in `app.js` gets around them. Don't take my word for it -- prove it.
 
-Add this inside your sign-in listener, right after the
-`console.log("Signed in as"...)` line, so it runs once you're signed in:
+Add this inside your Submit listener, right after `console.log("Saved!")`:
 
 ```js
 try {
-  // your hack goes here
+  await setDoc(doc(db, "quizzes/quiz-1/responses/someone-else"), { answers: ["hacked"] });
   console.log("It worked?!");
 } catch (error) {
-  console.log("Blocked:", error.code);
+  console.log("Blocked:", error.code, error.message);
 }
 ```
 
 `try`/`catch` lets your code keep running when something fails, and
-`error.code` tells you *why* it failed.
+`error.code` tells you *why* it failed. Click Submit. You should see
+`Blocked: permission-denied`. That's hack #1: writing someone else's
+response.
 
-Try these hacks *one at a time*. Each one needs an `await setDoc(...)`
-line, and you write the reference:
+Now swap in these hacks, *one at a time*. You write the `setDoc` line:
 
-1. Write `{ answers: ["hacked"] }` to `quizzes/quiz-1/responses/someone-else`.
 2. Write `{ title: "hacked" }` to the quiz itself.
 3. Write `{ answers: "hacked" }` (a string, not a list) to *your own*
-   response. (In here, your uid is `result.user.uid`.)
+   response.
 4. Write `{ answers: ["hi"], name: "Your Teacher" }` to your own response.
 
-Each one should print `Blocked: permission-denied`. If you get anything
-else, that means your code has a mistake, not that the rules stopped you
-(see the [error table in Step 4](4-save-your-answers.md#seeing-red)).
+Each one should say `permission-denied`. If it says anything else, read the
+message: that's a mistake in your code, not the rules (see the
+[error table in Step 4](4-save-your-answers.md#seeing-red)).
+
+One sneaky thing: if your address for #3 or #4 is wrong, you'll *also* get
+`permission-denied`, because you're writing to a document that isn't yours.
+`console.log` the address to make sure it really ends in your uid.
 
 Delete your hack code when you're done.
 
@@ -70,6 +73,9 @@ Delete your hack code when you're done.
 
 ## If you finish
 
+- Make the sign-in button stay hidden after a reload if you're already
+  signed in. (Hint: `await auth.authStateReady()` waits until Firebase
+  remembers who you are. After that, check `auth.currentUser`.)
 - Highlight your own row. (Hint: `responseDoc.id` is the document's ID.
   What should it match?)
 - Add a "Refresh" button that reloads everyone's answers without

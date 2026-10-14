@@ -77,7 +77,7 @@ const myResponseRef = doc(db, `quizzes/quiz-1/responses/${user.uid}`);
 | Error says | Usually means |
 |---|---|
 | `Cannot read properties of null (reading 'uid')` | You're not signed in. |
-| `Missing or insufficient permissions` | Your address is wrong (check every piece of the path), or you signed in with a personal account instead of your school one. |
+| `Missing or insufficient permissions` | Your address is wrong. Did you use backticks (`` ` ``), not quotes, so `${user.uid}` actually becomes your uid? `console.log` the address and check. Or: you signed in with a personal account instead of your school one. |
 | `ReferenceError: ___ is not defined` | A typo, or a name that doesn't exist where you used it. |
 | `invalid-argument` | Your path has the wrong number of pieces. A document path always has an even number: collection, doc, collection, doc. |
 | `Cross-Origin-Opener-Policy policy would block...` | Not you. That's Google's sign-in popup (`popup.ts`). Ignore it. |
