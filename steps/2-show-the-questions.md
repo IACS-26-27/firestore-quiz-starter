@@ -5,10 +5,12 @@ Right now the quiz only shows up in the console. Put it on the page.
 For **each** question in `quiz.questions`, add this HTML to `quizSection`:
 
 ```js
-`<label>
-  ${question.text}
-  <input type="text">
-</label>`
+`<p>
+  <label>
+    ${question.text}
+    <input type="text">
+  </label>
+</p>`
 ```
 
 You'll need a loop. You've used `for...of` and `innerHTML +=` before.
@@ -27,10 +29,12 @@ Save and sign in. You should see a text box for every question.
 ```js
 for (const question of quiz.questions) {
   quizSection.innerHTML += `
-    <label>
-      ${question.text}
-      <input type="text">
-    </label>
+    <p>
+      <label>
+        ${question.text}
+        <input type="text">
+      </label>
+    </p>
   `;
 }
 ```

@@ -30,6 +30,17 @@ Now show each response in `resultsSection` instead of the console. Show
 the person's name and their answers. (Hint: `response.answers.join(", ")`
 turns the array into one string.) Write it the same way you did Step 2.
 
+<details>
+<summary>Stuck? Peek at one way to write it</summary>
+
+```js
+resultsSection.innerHTML += `<p>${response.name}: ${response.answers.join(", ")}</p>`;
+```
+
+That goes inside the loop, in place of `console.log(response)`.
+
+</details>
+
 Then:
 
 1. Get a friend to submit.
@@ -54,6 +65,9 @@ doesn't just show text. It turns text into real HTML, and runs it.
 
 Now everyone clicks Submit. Your page just ran code that came out of the
 database. A real attacker wouldn't use an alert.
+
+(Why not just a `<script>` tag? Browsers skip scripts added with
+`innerHTML` — but they don't skip `onerror`. Attackers know that.)
 
 The fix: build each row with `textContent`, which shows text exactly as
 typed and never runs it.

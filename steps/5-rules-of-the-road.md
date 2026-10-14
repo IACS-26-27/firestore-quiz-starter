@@ -52,10 +52,11 @@ line. You write the reference:
    response.
 4. Write `{ answers: ["hi"], name: "Your Teacher" }` to your own response.
 
-Each one should print `Blocked: permission-denied`. If you see
-`Blocked: undefined`, that's a JavaScript mistake, not the rules — check
-the red error. (For example, `myResponseRef` only exists inside your Submit
-listener, so out here you need to make a new reference.)
+Each one should print `Blocked: permission-denied`. Anything else means
+your code has a mistake, not that the rules stopped you (see the
+[error table in Step 3](3-save-your-answers.md#seeing-red)). Watch out:
+`myResponseRef` only exists inside your Submit listener, so out here you
+need to make a new reference.
 
 Delete your hack code when you're done.
 
@@ -71,6 +72,7 @@ Delete your hack code when you're done.
 - Highlight your own row. (Hint: `responseDoc.id` is the document's ID.
   What should it match?)
 - Add a **Refresh** button that reloads everyone's answers without
-  resubmitting.
+  resubmitting. (Hint: move your Step 4 code into its own `async`
+  function, so both buttons can call it.)
 - Show which question each answer goes with, maybe as a `<table>`.
 - Your teacher can make a `quiz-2`. Change `quizId` and see what happens.
