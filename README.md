@@ -27,6 +27,11 @@ Do these in order. Each one adds a few lines to the same function in
   Keep it open the whole time.
 - Click "Sign in with Google" and use your *school* account. You should
   see `Signed in as ...` in the console.
+- You'll probably also see a few red `Cross-Origin-Opener-Policy` errors.
+  Ignore them. Look at the file name on the right side of each message:
+  they come from `popup.ts` (Google's sign-in code), not your `app.js`. When
+  something in the console is red, that file name tells you whose problem it
+  is.
 - Every time you save and the page reloads, you'll need to click Sign in
   again. Your code only runs after you sign in.
 

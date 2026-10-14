@@ -65,6 +65,7 @@ const myResponseRef = doc(db, "quizzes", quizId, "responses", user.uid);
 | `Missing or insufficient permissions` | Your address is wrong (check every piece of the path), or you signed in with a personal account instead of your school one. |
 | `ReferenceError: ___ is not defined` | A typo, or a name that doesn't exist where you used it. Is it `uid` or `user.uid`? |
 | `invalid-argument` | Your path has the wrong number of pieces. A document path always has an even number: collection, doc, collection, doc. |
+| `Cross-Origin-Opener-Policy policy would block...` | Not you. That's Google's sign-in popup (`popup.ts`). Ignore it. |
 
 (We'll get to where "permissions" come from in Step 5.)
 
